@@ -29,7 +29,7 @@ const Translate: React.FC<TranslateProps> = ({ msg, setMessages }) => {
     const { detectedLanguage } = useDetector();
     const [targetLang, setTargetLang] = useState(msg.targetLang || "fr");
     const [sourceLang, setSourceLang] = useState(detectedLanguage || "en");
-    const [error, setError] = useState<any>();
+    const [error, setError] = useState();
     const [translatedText, setTranslatedText] = useState(msg.translatedText || "");
     const [isTranslating, setIsTranslating] = useState(false);
 
@@ -70,7 +70,7 @@ const Translate: React.FC<TranslateProps> = ({ msg, setMessages }) => {
                 )
             );
             setIsTranslating(false)
-        } catch (error) {
+        } catch (error: string) {
             setError(error);
             setIsTranslating(false)
             console.error("Translation failed:", error);
