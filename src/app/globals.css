@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: #110d0d;
+  font-family: sans-serif;
+}
+
+.input {
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  border: 2px solid #171515;
+  background: #110d0d;
+  transition: input-shadow 0.3s ease, transform 0.3s ease;
+  box-shadow: 15px 15px 30px #070505, -15px -15px 30px #1b1515;
+}
+.button {
+  outline: none;
+  border-radius: 10px;
+  background: #110d0d;
+  border: 2px solid #171515;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  box-shadow: 33px 33px 66px #070505, -33px -33px 66px #1b1515;
+}
+.button:hover {
+  border: 2px solid #201d1d;
+  transform: translateY(-2px);
+  box-shadow: 15px 15px 30px #070505, -15px -15px 30px #1b1515;
+}
+.input:focus {
+  box-shadow: inset 39px 39px 78px #070505, inset -39px -39px 78px #1b1515;
+}
+.chat-box {
+  background: #110d0d;
+  box-shadow: -5px 5px 10px #0a0707, 5px -5px 10px #181313;
+}
