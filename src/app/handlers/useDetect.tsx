@@ -6,7 +6,32 @@ const useDetector = () => {
     const [result, setResult] = useState('')
     const [isTextToDetect, setIsTextToDetect] = useState('');
     const [detectedLanguage, setDetectedLanguage] = useState('')
-    const[message, setMessage] = useState('')
+    const[message, setMessage] = useState('');
+
+    const language = (lang: string) =>{
+        switch (lang) {
+            case "en":
+                return "English";
+                break;
+            case "pt":
+                return "Portuguese"
+                break;
+            case "es":
+                return "Spanish"
+                break;
+            case "ru":
+                return "Russian"
+                break;
+            case "tr":
+                return "Turkish"
+                break;
+            case "fr":
+                return "French"
+                break;        
+            default:
+                break;
+        }
+    }
 
     useEffect(() => {
         const handleDetect = async () => {
@@ -37,7 +62,7 @@ const useDetector = () => {
 
                 if (filteredResults.length > 0) {
                     const topResult = filteredResults[0];
-                    const detectedResult = `Detected Language: ${topResult.detectedLanguage}, Confidence: ${(topResult.confidence * 100).toFixed(2)}%`;
+                    const detectedResult = `I am ${(topResult.confidence * 100).toFixed(2)}% sure this is ${language(topResult.detectedLanguage)}`;
                     setResult(detectedResult);
                     localStorage.setItem("detectedResult", detectedResult);
                 } else {

@@ -1,10 +1,22 @@
 'use client'
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Detector from "./components/Detector";
+import NotAvailable from "./components/not-available/NotAvailable";
+
 
 export default function Home() {
-  useEffect(()=>{
-    localStorage.clear()
+  const [notAvailable, setNotAvailable] = useState(false);
+
+  useEffect(() => {
+    if (!window.ai) {
+      setNotAvailable(true)
+      console.error("AI API not available.");
+      return;
+    }
   }, [])
-  return  <Detector />;
+  return (
+    <div>
+      {notAvailable ? <NotAvailable /> : <Detector />}
+    </div>
+  );
 }

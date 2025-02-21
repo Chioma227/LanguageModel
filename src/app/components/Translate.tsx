@@ -29,6 +29,7 @@ const Translate: React.FC<TranslateProps> = ({ msg, setMessages }) => {
     const { detectedLanguage } = useDetector();
     const [targetLang, setTargetLang] = useState(msg.targetLang || "fr");
     const [sourceLang, setSourceLang] = useState(detectedLanguage || "en");
+    const [error, setError] = useState<any>();
     const [translatedText, setTranslatedText] = useState(msg.translatedText || "");
     const [isTranslating, setIsTranslating] = useState(false);
 
@@ -45,8 +46,6 @@ const Translate: React.FC<TranslateProps> = ({ msg, setMessages }) => {
             return;
         }
 
-        setIsTranslating(true);
-
         setMessages((prev) =>
             prev.map((m) =>
                 m.id === msg.id ? { ...m, isTranslating: true } : m
@@ -54,6 +53,7 @@ const Translate: React.FC<TranslateProps> = ({ msg, setMessages }) => {
         );
 
         try {
+            setIsTranslating(true);
             const translator = await window.ai.translator.create({
                 sourceLanguage: sourceLang,
                 targetLanguage: targetLang,
@@ -69,7 +69,10 @@ const Translate: React.FC<TranslateProps> = ({ msg, setMessages }) => {
                         : m
                 )
             );
+            setIsTranslating(false)
         } catch (error) {
+            setError(error);
+            setIsTranslating(false)
             console.error("Translation failed:", error);
         } finally {
             setIsTranslating(false);
@@ -103,7 +106,7 @@ const Translate: React.FC<TranslateProps> = ({ msg, setMessages }) => {
                         className="py-1 px-2 button text-white rounded"
                         disabled={isTranslating}
                     >
-                        {isTranslating ? "Translating..." : "Translate"}
+                        {isTranslating ? "Translating...": "Translate"}
                     </button>
                 </div>
             </div>
@@ -114,6 +117,7 @@ const Translate: React.FC<TranslateProps> = ({ msg, setMessages }) => {
                     <p className="font-semibold text-gray-200">{translatedText}</p>
                 </div>
             )}
+            {error && <small className="text-red-500">{error}</small>}
         </div>
     );
 };

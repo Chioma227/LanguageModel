@@ -56,12 +56,12 @@ const Detector = () => {
 
     return (
         <div className="flex flex-col h-screen gap-4 p-4 rounded-lg w-full">
-            <div className="flex-1 overflow-auto p-4 space-y-6">
+            <div className="flex-1 overflow-auto space-y-6">
                 {messages.length > 0 ? (
                     messages.map((msg) => (
                         <div key={msg.id} onMouseEnter={() => setHoveredId(msg.id)}
                             onMouseLeave={() => setHoveredId(null)}
-                            className="chat-box p-[25px] rounded-md flex justify-between gap-2">
+                            className="chat-box p-[25px] rounded-md flex justify-between">
                             <div>
                                 <div className="flex items-center gap-3 mb-[20px]">
                                     <FaCircleUser size={25} />
@@ -71,7 +71,7 @@ const Detector = () => {
                                 <Translate msg={msg} setMessages={setMessages} />
                             </div>
                             <div>
-                                {hoveredId === msg.id && <button onClick={() => handleDelete(msg.id)} className=""><AiTwotoneDelete size={20} /></button>}
+                                {hoveredId === msg.id && <button onClick={() => handleDelete(msg.id)}><AiTwotoneDelete size={20} /></button>}
                             </div>
                         </div>
                     ))

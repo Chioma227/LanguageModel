@@ -24,8 +24,9 @@ body {
   border: none;
   outline: none;
   border-radius: 10px;
-  border: 2px solid #171515;
+  border: 2px solid #252323;
   background: #110d0d;
+  padding: 10px;
   transition: input-shadow 0.3s ease, transform 0.3s ease;
   box-shadow: 15px 15px 30px #070505, -15px -15px 30px #1b1515;
 }
